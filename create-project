@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+if [[ $# -lt 2 ]]; then
+    echo -e "\nUsage: ${0} [package-name] [folder-name]\n"
+    exit 1
+fi
+
+templateDir=$(dirname ${0})
+cp -R ${templateDir} ${2} \
+&& cd ${2} \
+&& rm -rf create-project *.iml git-init-repo .idea dependency-reduced-pom.xml target .git \
+&& sed -i .tmp s/maventemplate/${1}/g pom.xml \
+&& rm -f pom.xml.tmp \
+&& cd src/main/java/com/brentmoen \
+&& mv maventemplate ${1} \
+&& cd ${1} \
+&& sed -i .tmp s/maventemplate/${1}/g App.java \
+&& rm -f App.java.tmp
