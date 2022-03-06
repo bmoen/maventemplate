@@ -15,4 +15,6 @@ cp -R ${templateDir} ${2} \
 && mv maventemplate ${1} \
 && cd ${1} \
 && sed -i .tmp s/maventemplate/${1}/g App.java \
-&& rm -f App.java.tmp
+&& sed -i .tmp s/maventemplate/${1}/g AppModule.java \
+&& sed -i .tmp s/maventemplate/${1}/g Config.java \
+&& rm -f *.java.tmp
